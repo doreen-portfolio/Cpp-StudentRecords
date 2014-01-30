@@ -147,8 +147,15 @@ public:
 int main(int argc, char* argv[]){
 	Student         s; /* Student object to store */
 	vector<Student> studentVector; /* vector of Students to store Student objects */
-	string          cmd1, cmd2, id, fname, lname, course;
-	int             grade, gradehigh, gradelow;
+	string          cmd1;
+	string          cmd2;
+	string          id;
+    string	        fname;
+	string          lname;
+	string          course;
+	int             grade;
+    int         	gradehigh;
+	int             gradelow;
 	char            oneline[256]; /* char array that stores user input */
 	vector<char*>   cmdvec; /* vector of char* to store user input as tokens */
 	char*           token; /* char* token to tokenize user input */
