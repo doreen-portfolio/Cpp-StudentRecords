@@ -180,7 +180,7 @@ int main(int argc, char* argv[]){
 	 */
 	sort(studentVector.begin(), studentVector.end(), cmp);
 	
-	string menu ="=========================MENU=========================\n1) show: displays all the info about matching records\n2) showid: only displays the IDs of matching records\n3) [show | showid] name <first name> <last name>: shows students matching first name and last name\n4) [show | showid] name <first name> *: shows students matching first name\n5) [show | showid] name * <last name>: shows students matching last name\n6) [show | showid] <course> <grade>: shows students with matching course and grade\n7) [show | showid] <course> <low grade> <high grade>: shows students whose grade in course is between low grade and high grade\n======================================================\n";
+	string menu ="=========================MENU=========================\n1) show: displays all the info about matching records\n2) showid: only displays the IDs of matching records\n3) [show | showid] name <first name> <last name>: shows students matching first name and last name\n4) [show | showid] name <first name> *: shows students matching first name\n5) [show | showid] name * <last name>: shows students matching last name\n6) [show | showid] grade <course> <grade>: shows students with matching course and grade\n7) [show | showid] grade <course> <low grade> <high grade>: shows students whose grade in course is between low grade and high grade\n======================================================\n";
 	/*
 	 *  Prompts user by displaying menu and storing user input in a char array. Tokenizes words in char array and searches records based on specified commands.
 	 */
