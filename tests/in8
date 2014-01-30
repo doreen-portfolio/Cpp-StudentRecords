@@ -1,0 +1,9 @@
+  show grade comp3512 20 50
+showall
+ show grade comp3512 90
+
+show name * simpson
+show name * apu
+show name apu *
+  show id a00000011
+
