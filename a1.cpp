@@ -150,11 +150,11 @@ int main(int argc, char* argv[]){
 	string          cmd1;
 	string          cmd2;
 	string          id;
-    string	        fname;
+	string          fname;
 	string          lname;
 	string          course;
 	int             grade;
-    int         	gradehigh;
+	int             gradehigh;
 	int             gradelow;
 	char            oneline[256]; /* char array that stores user input */
 	vector<char*>   cmdvec; /* vector of char* to store user input as tokens */
