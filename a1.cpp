@@ -35,11 +35,13 @@ bool cmp(const Student& s1, const Student& s2);
  *  Function class that returns true if a Student has a matching id, otherwise it returns false if a Student does not have a matching id.
  *
  */
-class FindID {
+class FindID 
+{
     std::string x_; /* id to be found */
 public:
     FindID(const std::string& x) : x_(x) {}
-    bool operator()(const Student& s){ 
+    bool operator()(const Student& s)
+	{ 
 		return s.id_ == x_; 
 	}
 };
@@ -50,11 +52,13 @@ public:
  *  Function class that returns true if a Student has a matching first name, otherwise it returns false if a Student does not have a matching first name.
  *
  */
-class FindFname {
+class FindFname 
+{
     std::string x_; /* first name to be found */
 public:
     FindFname(const std::string& x) : x_(x) {}
-    bool operator()(const Student& s){ 
+    bool operator()(const Student& s)
+	{ 
 		return s.name_.first_ == x_; 
 	}
 };
@@ -65,11 +69,13 @@ public:
  *  Function class that returns true if a Student has a matching last name, otherwise it returns false if a Student does not have a matching last name.
  *
  */
-class FindLname {
+class FindLname 
+{
     std::string x_; /* last name to be found */
 public:
     FindLname(const std::string& x) : x_(x) {}
-    bool operator()(const Student& s){ 
+    bool operator()(const Student& s)
+	{ 
 		return s.name_.last_ == x_; 
 	}
 };
@@ -80,14 +86,18 @@ public:
  *  Function class that returns 1 if a Student has a matching course and associated grade, otherwise it returns 0 if a Student does not have a matching course and grade.
  *
  */
-class FindCourseGrade {
+class FindCourseGrade 
+{
     std::string c_; /* course to be found */
 	int x_; /* grade to be found */
 public:
     FindCourseGrade(const std::string& c, const int& x) : c_(c), x_(x) {}
-    bool operator()(const Student& s){ 
-		for(vector<Grade>::size_type i = 0; i < s.gradeVector_.size(); i++){ 
-			if (s.gradeVector_[i].course_ == c_ && s.gradeVector_[i].score_ == x_){
+    bool operator()(const Student& s)
+	{ 
+		for(vector<Grade>::size_type i = 0; i < s.gradeVector_.size(); i++)
+		{ 
+			if (s.gradeVector_[i].course_ == c_ && s.gradeVector_[i].score_ == x_)
+			{
 				return true;
 			}
 		}
@@ -102,16 +112,21 @@ public:
  otherwise it returns 0 if a Student does not have a matching course and grade that falls within range.
  *
  */
-class FindCourseGradeRange {
+class FindCourseGradeRange 
+{
     std::string c_; /* course to be found */
 	int low_; /* low end of grade range */
 	int high_; /* high end of grade range */
 public:
     FindCourseGradeRange(const std::string& c, const int& low, const int& high) : c_(c), low_(low),high_(high)  {}
-    bool operator()(const Student& s){ 
-		for(vector<Grade>::size_type i = 0; i < s.gradeVector_.size(); i++){ 
-			if (s.gradeVector_[i].course_ == c_){
-				if(s.gradeVector_[i].score_ >= low_ && s.gradeVector_[i].score_ <= high_){
+    bool operator()(const Student& s)
+	{ 
+		for(vector<Grade>::size_type i = 0; i < s.gradeVector_.size(); i++)
+		{ 
+			if (s.gradeVector_[i].course_ == c_)
+			{
+				if(s.gradeVector_[i].score_ >= low_ && s.gradeVector_[i].score_ <= high_)
+				{
 					return true;
 				}
 			}
@@ -144,7 +159,8 @@ public:
  * 	@param argv argument.
  *
  */
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[])
+{
 	Student         s; /* Student object to store */
 	vector<Student> studentVector; /* vector of Students to store Student objects */
 	string          cmd1;
@@ -160,19 +176,22 @@ int main(int argc, char* argv[]){
 	vector<char*>   cmdvec; /* vector of char* to store user input as tokens */
 	char*           token; /* char* token to tokenize user input */
 	
-	if(argc != 2) {
+	if(argc != 2) 
+	{
 		cerr << "usage: " << argv[0] << " <source file>\n";
 		return 0;
 	}
 	ifstream f(argv[1]);
-	if(!f){
+	if(!f)
+	{
 		cerr << "unable to open " << argv[1] << endl;
 		return 1;
 	}
 	/*
 	 *  Reads in Student objects from a file and stores them in a vector of Students.
 	 */
-	while(f >> s){
+	while(f >> s)
+	{
 		studentVector.push_back(s);
 	}
 	/*
@@ -184,25 +203,31 @@ int main(int argc, char* argv[]){
 	/*
 	 *  Prompts user by displaying menu and storing user input in a char array. Tokenizes words in char array and searches records based on specified commands.
 	 */
-	while(get_cmd(menu, oneline)){
+	while(get_cmd(menu, oneline))
+	{
 		token = strtok(oneline, " ");
 		cmdvec.push_back(token);
-		while((token = strtok(NULL, " ")) != NULL){
+		while((token = strtok(NULL, " ")) != NULL)
+		{
 			cmdvec.push_back(token);
 		}
-		if(cmdvec.size() == 1 && cmdvec[0] == NULL){
+		if(cmdvec.size() == 1 && cmdvec[0] == NULL)
+		{
 			cmdvec.clear();
 			cout << endl;
 			continue;
 		}
 		
-		if(cmdvec.size() == 1){
+		if(cmdvec.size() == 1)
+		{
 			cmd1 = cmdvec[0];
 			/*
 			 *  display all Student records.
 			 */
-			if(cmd1.compare("show") == 0){
-				for(vector<Student>::size_type i = 0; i < studentVector.size(); i++) {
+			if(cmd1.compare("show") == 0)
+			{
+				for(vector<Student>::size_type i = 0; i < studentVector.size(); i++) 
+				{
 					studentVector[i].display(cout);
 				}
 				cout << endl;
@@ -210,28 +235,36 @@ int main(int argc, char* argv[]){
 			/*
 			 *  display all Student ids.
 			 */
-			else if(cmd1.compare("showid") == 0){
-				for(vector<Student>::size_type i = 0; i < studentVector.size(); i++) {
+			else if(cmd1.compare("showid") == 0)
+			{
+				for(vector<Student>::size_type i = 0; i < studentVector.size(); i++) 
+				{
 					studentVector[i].display_id(cout);
 				}
 				cout << endl;
-			} else {
+			} 
+			else 
+			{
 				cout << endl;
 			}
 		}
-		else if(cmdvec.size() > 1){
+		else if(cmdvec.size() > 1)
+		{
 			cmd1 = cmdvec[0];
 			cmd2 = cmdvec[1];
-			if(cmd1.compare("show") == 0) {
+			if(cmd1.compare("show") == 0) 
+			{
 				/*
 				 *  find Student records by student id.
 				 */
-				if(cmd2.compare("id") == 0){
+				if(cmd2.compare("id") == 0)
+				{
 					id = cmdvec[2];
 					vector<Student>::iterator it =
 						std::find_if(studentVector.begin(), studentVector.end(),
 							FindID(id));
-					if (it != studentVector.end()) {
+					if (it != studentVector.end()) 
+					{
 						cout << *it;
 					} 
 					cout << endl;
@@ -239,21 +272,26 @@ int main(int argc, char* argv[]){
 				/*
 				 *  display all Student records.
 				 */
-				else if(cmd2.compare("name") == 0){
+				else if(cmd2.compare("name") == 0)
+				{
 					fname = cmdvec[2];
 					lname = cmdvec[3];
-					if(fname == "*" && lname == "*"){
-						for(vector<Student>::size_type i = 0; i < studentVector.size(); i++) {
+					if(fname == "*" && lname == "*")
+					{
+						for(vector<Student>::size_type i = 0; i < studentVector.size(); i++) 
+						{
 							studentVector[i].display(cout);
 						}
 					}
 					/*
 					 *  find Student records by first name.
 					 */
-					if(fname != "*" && lname == "*"){
+					if(fname != "*" && lname == "*")
+					{
 						vector<Student>::iterator it =
 						find_if(studentVector.begin(), studentVector.end(), FindFname(fname));
-						while (it != studentVector.end()) {
+						while (it != studentVector.end()) 
+						{
 							cout << *it;
 							it =
 							find_if(it+1, studentVector.end(), FindFname(fname));
@@ -262,10 +300,12 @@ int main(int argc, char* argv[]){
 					/*
 					 *  find Student records by last name.
 					 */
-					if(fname == "*" && lname != "*"){
+					if(fname == "*" && lname != "*")
+					{
 						vector<Student>::iterator it =
 						find_if(studentVector.begin(), studentVector.end(),	FindLname(lname));
-						while (it != studentVector.end()) {
+						while (it != studentVector.end()) 
+						{
 							cout << *it;
 							it =
 							find_if(it+1, studentVector.end(), FindLname(lname));
@@ -274,18 +314,21 @@ int main(int argc, char* argv[]){
 					/*
 					 *  find Student records by both first and last names.
 					 */
-					if(fname != "*" && lname != "*"){
+					if(fname != "*" && lname != "*")
+					{
 						vector<Student> temp;
 						vector<Student>::iterator it =
 						find_if(studentVector.begin(), studentVector.end(),	FindFname(fname));
-						while (it != studentVector.end()) {
+						while (it != studentVector.end()) 
+						{
 							temp.push_back(*it);
 							it =
 							find_if(it+1, studentVector.end(), FindFname(fname));
 						}
 						it =
 						find_if(temp.begin(), temp.end(),	FindLname(lname));
-						while (it != temp.end()) {
+						while (it != temp.end()) 
+						{
 							cout << *it;
 							it =
 							find_if(it+1, temp.end(), FindLname(lname));
@@ -296,14 +339,17 @@ int main(int argc, char* argv[]){
 				/*
 				 *  find Student records by course and grade.
 				 */
-				else if(cmd2.compare("grade") == 0){
+				else if(cmd2.compare("grade") == 0)
+				{
 					course = cmdvec[2];
-					if(cmdvec.size() == 4) { 
+					if(cmdvec.size() == 4) 
+					{ 
 						istringstream buffer1(cmdvec[3]); 
 						buffer1 >> grade;
 						vector<Student>::iterator it =
 						find_if(studentVector.begin(), studentVector.end(), FindCourseGrade(course, grade));
-						while (it != studentVector.end()) {
+						while (it != studentVector.end()) 
+						{
 							cout << *it;
 							it =
 							find_if(it+1, studentVector.end(), FindCourseGrade(course, grade));
@@ -312,7 +358,8 @@ int main(int argc, char* argv[]){
 					/*
 					 *  search and display Student records by course and grade range.
 					 */
-					else if(cmdvec.size() == 5) { 
+					else if(cmdvec.size() == 5) 
+					{ 
 						vector<Student> tempVec;
 						istringstream buffer2(cmdvec[3]);
 						buffer2 >> gradelow;
@@ -320,7 +367,8 @@ int main(int argc, char* argv[]){
 						buffer3 >> gradehigh;
 						vector<Student>::iterator it =
 						find_if(studentVector.begin(), studentVector.end(), FindCourseGradeRange(course, gradelow, gradehigh));
-						while (it != studentVector.end()) {
+						while (it != studentVector.end()) 
+						{
 							cout << *it;
 							it =
 							find_if(it+1, studentVector.end(), FindCourseGradeRange(course, gradelow, gradehigh));
@@ -329,39 +377,47 @@ int main(int argc, char* argv[]){
 					cout << endl;
 				}
 			}
-			if(cmd1.compare("showid") == 0) {
+			if(cmd1.compare("showid") == 0) 
+			{
 				/*
 				 *  find specified student id.
 				 */
-				if(cmd2.compare("id") == 0){
+				if(cmd2.compare("id") == 0)
+				{
 					id = cmdvec[2];
 					vector<Student>::iterator it =
 						std::find_if(studentVector.begin(), studentVector.end(),
 							FindID(id));
-					if (it != studentVector.end()) {
+					if (it != studentVector.end()) 
+					{
 						Student temp = *it;
 						temp.display_id(cout);
 					}
 					cout << endl;
 				}
-				else if(cmd2.compare("name") == 0){
+				else if(cmd2.compare("name") == 0)
+				{
 					fname = cmdvec[2];
 					lname = cmdvec[3];
 					/*
 					 *  display all student ids.
 					 */
-					if(fname == "*" && lname == "*"){
-						for(vector<Student>::size_type i = 0; i < studentVector.size(); i++) {
+					if(fname == "*" && lname == "*")
+					{
+						for(vector<Student>::size_type i = 0; i < studentVector.size(); i++) 
+						{
 							studentVector[i].display_id(cout);
 						}
 					}
 					/*
 					 *  find student ids by first names.
 					 */
-					if(fname != "*" && lname == "*"){
+					if(fname != "*" && lname == "*")
+					{
 						vector<Student>::iterator it =
 						find_if(studentVector.begin(), studentVector.end(), FindFname(fname));
-						while (it != studentVector.end()) {
+						while (it != studentVector.end()) 
+						{
 							Student temp = *it;
 							temp.display_id(cout);
 							it =
@@ -371,10 +427,12 @@ int main(int argc, char* argv[]){
 					/*
 					 *  find student ids by last names.
 					 */
-					if(fname == "*" && lname != "*"){
+					if(fname == "*" && lname != "*")
+					{
 						vector<Student>::iterator it =
 						find_if(studentVector.begin(), studentVector.end(), FindLname(lname));
-						while (it != studentVector.end()) {
+						while (it != studentVector.end()) 
+						{
 							Student temp = *it;
 							temp.display_id(cout);
 							it =
@@ -384,18 +442,21 @@ int main(int argc, char* argv[]){
 					/*
 					 *  find student ids by both first and last names.
 					 */
-					if(fname != "*" && lname != "*"){
+					if(fname != "*" && lname != "*")
+					{
 						vector<Student> tempVec;
 						vector<Student>::iterator it =
 						find_if(studentVector.begin(), studentVector.end(),	FindFname(fname));
-						while (it != studentVector.end()) {
+						while (it != studentVector.end()) 
+						{
 							tempVec.push_back(*it);
 							it =
 							find_if(it+1, studentVector.end(), FindFname(fname));
 						}
 						it =
 						find_if(tempVec.begin(), tempVec.end(),	FindLname(lname));
-						while (it != tempVec.end()) {
+						while (it != tempVec.end()) 
+						{
 							Student temp = *it;
 							temp.display_id(cout);
 							it =
@@ -407,18 +468,21 @@ int main(int argc, char* argv[]){
 				/*
 				 *  find student ids by grade.
 				 */
-				else if(cmd2.compare("grade") == 0){
+				else if(cmd2.compare("grade") == 0)
+				{
 					course = cmdvec[2];
 					/*
 					 *  find student ids by course and grade.
 					 */
-					if(cmdvec.size() == 4) { 
+					if(cmdvec.size() == 4) 
+					{ 
 						istringstream buffer4(cmdvec[3]);
 						buffer4 >> grade; 
 						
 						vector<Student>::iterator it =
 						find_if(studentVector.begin(), studentVector.end(), FindCourseGrade(course, grade));
-						while (it != studentVector.end()) {
+						while (it != studentVector.end()) 
+						{
 							Student temp = *it;
 							temp.display_id(cout);
 							it =
@@ -428,14 +492,16 @@ int main(int argc, char* argv[]){
 					/*
 					 *  find student ids by course and grade range.
 					 */
-					else if(cmdvec.size() == 5) { 
+					else if(cmdvec.size() == 5) 
+					{ 
 						istringstream buffer5(cmdvec[3]);
 						buffer5 >> gradelow;
 						istringstream buffer6(cmdvec[4]);
 						buffer6 >> gradehigh;
 						vector<Student>::iterator it =
 						find_if(studentVector.begin(), studentVector.end(), FindCourseGradeRange(course, gradelow, gradehigh));
-						while (it != studentVector.end()) {
+						while (it != studentVector.end()) 
+						{
 							Student temp = *it;
 							temp.display_id(cout);
 							it =
@@ -446,7 +512,8 @@ int main(int argc, char* argv[]){
 				}
 			}
 		} 
-		else {
+		else 
+		{
 			cout << endl;
 		}
 		/*
@@ -467,10 +534,13 @@ int main(int argc, char* argv[]){
  *  @return bool  true if successful in reading in a line, false if unsuccessful in reading in a line.
  *
  */
-bool get_cmd(const string& prompt, char* oneline){
-	while(1){
+bool get_cmd(const string& prompt, char* oneline)
+{
+	while(1)
+	{
 		cerr << prompt;
-		if(!cin.getline(oneline, 256)){
+		if(!cin.getline(oneline, 256))
+		{
 			cin.clear();
 			break;
 		} else {
@@ -491,6 +561,7 @@ bool get_cmd(const string& prompt, char* oneline){
  *  @return bool  true if the first Student's id is smaller than the second Student's, false if the first Student's id is larger than the second Student's.
  *
  */
-bool cmp(const Student& s1, const Student& s2) {
+bool cmp(const Student& s1, const Student& s2) 
+{
 	return s1.id_ < s2.id_; 
 }
